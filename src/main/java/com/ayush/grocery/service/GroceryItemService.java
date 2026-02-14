@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ayush.grocery.entity.GroceryItem;
+import com.ayush.grocery.exception.ResourceNotFoundException;
 import com.ayush.grocery.repository.GroceryItemRepository;
 
 @Service
@@ -29,7 +30,7 @@ public class GroceryItemService {
     //Get Item By Id
     public GroceryItem getItemById(Long id){
         return groceryItemRepository.findById(id).
-        orElseThrow(() -> new RuntimeException("Item Not Found!"));
+        orElseThrow(() -> new ResourceNotFoundException("Item Not Found!"));
     }
 
     //Update Item

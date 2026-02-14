@@ -2,7 +2,7 @@ package com.ayush.grocery.entity;
 
 import java.util.List;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,14 +15,15 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;   
 
     private String name;
     private String email;
     private String address;
     private String phone;
-    
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<CustomerOrder> orders; 
 
+    // Prevent infinite JSON recursion
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<CustomerOrder> orders;
 }

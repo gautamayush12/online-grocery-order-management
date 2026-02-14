@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ayush.grocery.entity.Customer;
+import com.ayush.grocery.exception.ResourceNotFoundException;
 import com.ayush.grocery.repository.CustomerRepository;
 
 @Service
@@ -27,7 +28,7 @@ public class CustomerService {
     //Get Customer By Id
     public Customer getCustomerById(Long id){
         return customerRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Customer Not Found!"));
+        .orElseThrow(() -> new ResourceNotFoundException("Customer Not Found!"));
     }
 
     //Update Customer
